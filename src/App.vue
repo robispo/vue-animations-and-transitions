@@ -15,6 +15,10 @@
         </button>
         <br />
         <br />
+        <transition :name="alertAnimation" :type="dynamicType" mode="out-in">
+          <div class="alert alert-info" v-if="show" key="1">This is some info.</div>
+          <div class="alert alert-warning" v-else key="2">This is some warning.</div>
+        </transition>
         <transition :name="alertAnimation" :type="dynamicType">
           <div class="alert alert-info" v-show="show">This is some info.</div>
         </transition>
