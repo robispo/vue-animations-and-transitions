@@ -16,8 +16,12 @@
         <br />
         <br />
         <transition :name="alertAnimation" :type="dynamicType" mode="out-in">
-          <div class="alert alert-info" v-if="show" key="1">This is some info.</div>
-          <div class="alert alert-warning" v-else key="2">This is some warning.</div>
+          <div class="alert alert-info" v-if="show" key="1">
+            This is some info.
+          </div>
+          <div class="alert alert-warning" v-else key="2">
+            This is some warning.
+          </div>
         </transition>
         <transition :name="alertAnimation" :type="dynamicType">
           <div class="alert alert-info" v-show="show">This is some info.</div>
@@ -38,6 +42,26 @@
         >
           <div class="alert alert-info" v-if="show">This is some info.</div>
         </transition>
+        <hr />
+        <button class="btn btn-primary" @click="load = !load">
+          Show / Remove
+        </button>
+        <br /><br />
+        <transition
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @after-enter="afterEnter"
+          @enter-cancelled="enterCancelled"
+          @before-leave="beforeLeave"
+          @leave="leave"
+          @after-leave="afterLeave"
+          @leave-cancelled="leaveCancelled"
+        >
+          <div
+            style="width:100px; height:100px; background-color:lightgreen;"
+            v-if="load"
+          ></div>
+        </transition>
       </div>
     </div>
   </div>
@@ -47,13 +71,54 @@
   export default {
     data() {
       return {
-        show: true,
+        show: false,
+        load: true,
         alertAnimation: 'fade'
       };
     },
     computed: {
       dynamicType() {
         return this.alertAnimation == 'fade' ? 'transition' : 'animation';
+      }
+    },
+    methods: {
+      beforeEnter(el) {
+        this.getThisFunctionName();
+      },
+      enter(el, done) {
+        this.getThisFunctionName();
+        done();
+      },
+      afterEnter(el) {
+        this.getThisFunctionName();
+      },
+      enterCancelled(el) {
+        this.getThisFunctionName();
+      },
+      beforeLeave(el) {
+        this.getThisFunctionName();
+      },
+      leave(el, done) {
+        this.getThisFunctionName();
+        done();
+      },
+      afterLeave(el) {
+        this.getThisFunctionName();
+      },
+      leaveCancelled(el) {
+        this.getThisFunctionName();
+      },
+      getThisFunctionName() {
+        let nameOfFunctionThatCallMe = '';//arguments.callee.toString();
+        // nameOfFunctionThatCallMe = nameOfFunctionThatCallMe.substr(
+        //   'function '.length
+        // );
+        // nameOfFunctionThatCallMe = nameOfFunctionThatCallMe.substr(
+        //   0,
+        //   myName.indexOf('(')
+        // );
+
+        return console.log(arguments);
       }
     }
   };
