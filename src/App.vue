@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Animations</h1>
-        <!-- <hr />
+        <hr />
         <select v-model="alertAnimation">
           <option value="fade">Fade</option>
           <option value="slide">Slice</option>
@@ -78,7 +78,7 @@
         <br /><br />
         <transition name="fade" appear mode="out-in">
           <component :is="selectedComponent"></component>
-        </transition> -->
+        </transition>
         <hr />
         <button class="btn btn-primary" @click="addItem">Add Item</button>
         <br /><br />
