@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Animations</h1>
-        <hr />
+        <!-- <hr />
         <select v-model="alertAnimation">
           <option value="fade">Fade</option>
           <option value="slide">Slice</option>
@@ -78,7 +78,22 @@
         <br /><br />
         <transition name="fade" appear mode="out-in">
           <component :is="selectedComponent"></component>
-        </transition>
+        </transition> -->
+        <hr />
+        <button class="btn btn-primary" @click="addItem">Add Item</button>
+        <br /><br />
+        <ul class="list-group">
+          <transition-group name="slide">
+            <li
+              class="list-group-item pointer"
+              v-for="(n, i) in numbers"
+              :key="i"
+              @click="numbers.splice(i, 1)"
+            >
+              {{ n }}
+            </li>
+          </transition-group>
+        </ul>
       </div>
     </div>
   </div>
@@ -99,7 +114,8 @@
         load: true,
         alertAnimation: 'fade',
         elementWidth: 100,
-        selectedComponent: 'app-success-alert'
+        selectedComponent: 'app-success-alert',
+        numbers: [1, 2, 3, 4, 5]
       };
     },
     computed: {
@@ -153,6 +169,10 @@
       },
       leaveCancelled(el) {
         console.log('leaveCancelled');
+      },
+      addItem() {
+        const pos = Math.floor(Math.random() * this.numbers.length);
+        this.numbers.splice(pos, 0, this.numbers.length + 1);
       }
     }
   };
@@ -184,8 +204,13 @@
   }
   .slide-leave-active {
     animation: slide-out 1s ease-out forwards;
-    transition: opacity 3s;
+    transition: opacity 1s;
     opacity: 0;
+    position: absolute;
+  }
+
+  .slide-move {
+    transition: transform 1s;
   }
 
   @keyframes slide-in {
@@ -203,5 +228,12 @@
     to {
       transform: translateY(20px);
     }
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+  .pointer:hover {
+    background-color: #ddd;
   }
 </style>
