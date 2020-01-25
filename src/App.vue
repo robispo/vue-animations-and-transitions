@@ -83,42 +83,30 @@
     },
     methods: {
       beforeEnter(el) {
-        this.getThisFunctionName();
+        console.log('beforeEnter');
       },
       enter(el, done) {
-        this.getThisFunctionName();
+        console.log('enter');
         done();
       },
       afterEnter(el) {
-        this.getThisFunctionName();
+        console.log('afterEnter');
       },
       enterCancelled(el) {
-        this.getThisFunctionName();
+        console.log('enterCancelled');
       },
       beforeLeave(el) {
-        this.getThisFunctionName();
+        console.log('beforeLeave');
       },
       leave(el, done) {
-        this.getThisFunctionName();
+        console.log('leave');
         done();
       },
       afterLeave(el) {
-        this.getThisFunctionName();
+        console.log('afterLeave');
       },
       leaveCancelled(el) {
-        this.getThisFunctionName();
-      },
-      getThisFunctionName() {
-        let nameOfFunctionThatCallMe = '';//arguments.callee.toString();
-        // nameOfFunctionThatCallMe = nameOfFunctionThatCallMe.substr(
-        //   'function '.length
-        // );
-        // nameOfFunctionThatCallMe = nameOfFunctionThatCallMe.substr(
-        //   0,
-        //   myName.indexOf('(')
-        // );
-
-        return console.log(arguments);
+        console.log('leaveCancelled');
       }
     }
   };
